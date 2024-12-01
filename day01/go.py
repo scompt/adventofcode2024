@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 f = open('input2')
 
 lefts = []
@@ -8,12 +10,16 @@ for line in f.readlines():
 	lefts.append(int(l))
 	rights.append(int(r))
 
-lefts.sort()
-rights.sort()
+left_counts = defaultdict(lambda: 0)
+right_counts = defaultdict(lambda: 0)
 
-total_dist = 0
-for l, r in zip(lefts, rights):
-	dist = abs(l-r)
-	total_dist += dist
+for alist, counts in [(lefts, left_counts), (rights, right_counts)]:
+	for num in alist:
+		counts[num] += 1
 
-print(total_dist)
+similarity = 0
+for num, count in left_counts.items():
+	similarity += num * count * right_counts[num]
+
+print(similarity)
+
