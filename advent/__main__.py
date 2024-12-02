@@ -19,7 +19,7 @@ for day in range(1, 26):
 				day_printed = True
 			print('\tPart %d' % part)
 			inputs = glob.glob(test_glob)
-			for input_filename in inputs:
+			for input_filename in sorted(inputs):
 				with open(input_filename) as input_file:
 					actual_output = mod.go(input_file)
 				output_filename = input_filename.removesuffix('in') + 'out'
